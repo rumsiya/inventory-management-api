@@ -22,7 +22,6 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
 # Build
-RUN php artisan key:generate
 RUN php artisan migrate --force
 
 # Expose port
