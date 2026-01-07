@@ -42,8 +42,18 @@ class ProductController extends Controller
 
 
         if($validated){
-            $image = $request->file('image');
-            $imagePath = $image->store('assets','public');
+            // $image = $request->file('image');
+            // $imagePath = $image->store('assets','public');
+
+                        $imageUrl = null;
+
+                    if ($request->hasFile('image')) {
+                        $upload = cloudinary()->upload(
+                            $request->file('image')->getRealPath()
+                        );
+                        $imageUrl = $upload->getSecurePath();
+            }
+
             $data = [
                 'product_name' => $validated['product_name'],
                 'quantity' => $validated['quantity'],
@@ -113,8 +123,15 @@ class ProductController extends Controller
 
         if($validated){
 
-            $image = $request->file('image');
-            $imagePath = $image->store('assets','public');
+            if ($request->hasFile('image')) {
+            $upload = cloudinary()->upload(
+                $request->file('image')->getRealPath()
+            );
+            $imageUrl = $upload->getSecurePath();
+        }
+
+            // $image = $request->file('image');
+            // $imagePath = $image->store('assets','public');
             $data = [
                 'product_name' => $validated['product_name'],
                 'quantity' => $validated['quantity'],
