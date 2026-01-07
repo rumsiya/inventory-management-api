@@ -50,9 +50,10 @@ class ProductController extends Controller
                         $imageUrl = null;
 
                     if ($request->hasFile('image')) {
-                        $upload = cloudinary()->upload(
+                       $upload = Cloudinary::upload(
                             $request->file('image')->getRealPath()
                         );
+
                         $imageUrl = $upload->getSecurePath();
             }
 
@@ -126,9 +127,10 @@ class ProductController extends Controller
         if($validated){
 
             if ($request->hasFile('image')) {
-            $upload = cloudinary()->upload(
+             $upload = Cloudinary::upload(
                 $request->file('image')->getRealPath()
             );
+
             $imageUrl = $upload->getSecurePath();
         }
 
