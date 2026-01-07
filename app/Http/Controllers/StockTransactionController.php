@@ -123,5 +123,20 @@ class StockTransactionController extends Controller
         //
     }
 
+    public function getReports(){
+         $stocks =  StockTransaction::with(['getProduct', 'getUnit'])
+            ->select(
+                DB::raw("DATE_FORMAT(created_at, '%b') as month"),
+                DB::raw('SUM(quantity) as total_quantity')
+            )
+            ->groupBy( 'month')
+            ->orderBy('month')
+            ->get();
+        return response()->json([
+            'success' => true,
+            'stocks' => $stocks
+        ]);
+    }
+
 
 }

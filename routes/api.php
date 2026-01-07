@@ -20,5 +20,6 @@ Route::middleware('auth:api')->group(function(){
     Route::apiResource('categories',CategoryController::class);
     Route::apiResource('suppliers',SupplierController::class);
     Route::apiResource('stocks' , StockTransactionController::class);
+    Route::get('reports' , [StockTransactionController::class,'getReports']);
 
 });
