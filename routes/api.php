@@ -24,14 +24,4 @@ Route::middleware('auth:api')->group(function(){
 
 });
 
-Route::get('/debug-image', function () {
-    $path = storage_path('app/public/assets');
 
-    return [
-        'folder_exists' => is_dir($path),
-        'files' => is_dir($path) ? scandir($path) : 'no folder',
-        'file_exists' => file_exists(
-            storage_path('app/public/assets/VlU3NTOtpUjMThdGN84G4rhVKEAalYeQmBHYIOOx.webp')
-        )
-    ];
-});
