@@ -63,7 +63,8 @@ class ProductController extends Controller
                                     'folder' => 'products'
                                 ]
                             );
-                            $imagePath = $result['public_id'];
+            $imagePath = $result['public_id'].'.'.$result['format'];
+
 
             }
             $data = [
@@ -149,7 +150,8 @@ class ProductController extends Controller
                     'folder' => 'products'
                 ]
             );
-            $imagePath = $result['public_id'];
+            $imagePath = $result['public_id'].'.'.$result['format'];
+
          }
 
             // $image = $request->file('image');
