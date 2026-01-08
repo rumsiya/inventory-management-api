@@ -64,7 +64,6 @@ class ProductController extends Controller
                                 ]
                             );
             $imagePath = $result['public_id'].'.'.$result['format'];
-                            return $imagePath;
 
             }
             $data = [
