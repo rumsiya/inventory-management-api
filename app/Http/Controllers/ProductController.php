@@ -64,7 +64,7 @@ class ProductController extends Controller
                                 ]
                             );
             $imagePath = $result['public_id'].'.'.$result['format'];
-
+                            return $imagePath;
 
             }
             $data = [
@@ -128,7 +128,7 @@ class ProductController extends Controller
             'unit_id' => 'required|numeric',
             'category_id' => 'required|numeric',
             'supplier_id' => 'required|numeric',
-            'image' => 'nullable|image|mimes:jpeg,jpg,png'
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,webp'
         ]);
 
 
