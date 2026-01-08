@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
-
+use Cloudinary\Cloudinary;
 
 class ProductController extends Controller
 {
@@ -42,21 +41,31 @@ class ProductController extends Controller
 
 
 
-
         if($validated){
             // $image = $request->file('image');
             // $imagePath = $image->store('assets','public');
 
                         $imageUrl = null;
 
+
                     if ($request->hasFile('image')) {
-                       $upload = Cloudinary::upload(
-                            $request->file('image')->getRealPath()
-                        );
+                             $cloudinary = new Cloudinary([
+                                'cloud' => [
+                                    'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                                    'api_key'    => env('CLOUDINARY_API_KEY'),
+                                    'api_secret' => env('CLOUDINARY_API_SECRET'),
+                                ],
+                            ]);
 
-                        $imageUrl = $upload->getSecurePath();
+                            $result = $cloudinary->uploadApi()->upload(
+                                $request->file('image')->getRealPath(),
+                                [
+                                    'folder' => 'products'
+                                ]
+                            );
+                            $imagePath = $result['public_id'];
+
             }
-
             $data = [
                 'product_name' => $validated['product_name'],
                 'quantity' => $validated['quantity'],
@@ -127,12 +136,21 @@ class ProductController extends Controller
         if($validated){
 
             if ($request->hasFile('image')) {
-             $upload = Cloudinary::upload(
-                $request->file('image')->getRealPath()
+                $cloudinary = new Cloudinary([
+                    'cloud' => [
+                        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                        'api_key'    => env('CLOUDINARY_API_KEY'),
+                        'api_secret' => env('CLOUDINARY_API_SECRET'),
+                    ],
+                ]);
+            $result = $cloudinary->uploadApi()->upload(
+                $request->file('image')->getRealPath(),
+                [
+                    'folder' => 'products'
+                ]
             );
-
-            $imageUrl = $upload->getSecurePath();
-        }
+            $imagePath = $result['public_id'];
+         }
 
             // $image = $request->file('image');
             // $imagePath = $image->store('assets','public');
