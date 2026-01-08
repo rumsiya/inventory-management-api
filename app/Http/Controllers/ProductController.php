@@ -134,8 +134,8 @@ class ProductController extends Controller
 
 
         if($validated){
-
             if ($request->hasFile('image')) {
+
                 $cloudinary = new Cloudinary([
                     'cloud' => [
                         'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
@@ -150,6 +150,9 @@ class ProductController extends Controller
                 ]
             );
             $imagePath = $result['public_id'].'.'.$result['format'];
+
+         }else{
+            $imagePath = $product->image;
 
          }
 
