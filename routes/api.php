@@ -8,6 +8,7 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\StockTransactionController;
+use App\Http\Controllers\RolesController;
 
 
 Route::post('/login',[AuthController::class,'login']);
@@ -15,6 +16,7 @@ Route::post('/register',[AuthController::class,'register']);
 
 Route::middleware('auth:api')->group(function(){
     Route::apiResource('users',Usercontroller::class);
+    Route::apiResource('roles',RolesController::class);
     Route::apiResource('products',ProductController::class);
     Route::apiResource('units',UnitController::class);
     Route::apiResource('categories',CategoryController::class);
